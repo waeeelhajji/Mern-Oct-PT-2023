@@ -129,7 +129,7 @@ animals.map(function (oneElem) {
     return oneElem + "is awesome"
 })
 
-const animals = ["leopard🐆 ", "giraffe 🦒", "zebra 🦓", "elephant 🐘 ", "monkey 🙈", "lion 🦁"]
+// const animals = ["leopard🐆", "giraffe", "zeb 🦓", "ele🐘", "monkey🙈", "lion🦁"]
 
 const awesomeAnimals = animals.map((oneElem) => {
 
@@ -143,4 +143,37 @@ const value = [1, 2, 3, 4, 5]
 const newValues = value.map(val => val * 2)
 
 console.log(newValues)
+
+
+
+//?-------.filter()
+
+// ["leopard🐆", "giraffe", "zebra 🦓", "elephant🐘", "monkey🙈", "lion🦁"]
+// // undefined --- undefined -- undefined --- undefined ----- undefined
+
+const animals = ["leopard🐆", "giraffe", "zeb🦓", "ele🐘", "monkey🙈", "lion🦁"]
+
+const filteredAnimal = animals.filter((filteredElem) => {
+    if (filteredElem.length <= 5) {
+        console.log("false :", filteredElem)
+        return false
+    } else {
+        return true
+    }
+})
+
+const length = animals.map(val => val.length)
+console.log(object)
+
+const oneLineFilter = animals.filter((elm) => {
+
+    return elm.length <= 5 // true or false 
+
+})
+
+const oneLineFN = animals.filter((elm) => elm.length <= 5)
+
+
+
+console.log(oneLineFilter)
 
