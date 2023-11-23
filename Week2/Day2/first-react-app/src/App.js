@@ -16,6 +16,7 @@ function App() {
   return (
     <fieldset>
       <SecondeComponent />
+      <SecondeComponent />
       <legend>SecondeComponent.jsx</legend>
       <h2>Another One 😏😏</h2>
 
