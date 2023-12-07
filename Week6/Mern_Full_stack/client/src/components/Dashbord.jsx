@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { Link } from 'react-router-dom'
 
 const Dashbord = () => {
 
@@ -7,7 +8,7 @@ const Dashbord = () => {
     const [students, setStudents] = useState([])
 
     //2
-    useEffect(() => {
+    function refrech() {
         axios.get("http://localhost:5000/api/student")
             .then(res => {
                 console.log(res.data)
@@ -16,12 +17,26 @@ const Dashbord = () => {
             .catch(err => {
                 console.log(err)
             })
+
+    }
+    useEffect(() => {
+        refrech()
     }, [])
 
-
-
-
-
+    const DeleteThisStudent = (deleteId) => {
+        axios.delete("http://localhost:5000/api/student/" + deleteId)
+            .then(res => {
+                refrech()
+                console.log(res.data)
+                const filteredStudents = students.filter((eachStudent) => {
+                    return eachStudent._id !== deleteId
+                })
+                setStudents(filteredStudents)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
 
 
@@ -29,20 +44,20 @@ const Dashbord = () => {
         <div>
             <h1>ALL Students</h1>
             {
-                students.map((oneSt) => {
+                students.map((oneSt, idx) => {
                     return (
-                        <div>
-
+                        <div key={idx}>
                             <ul>
+
                                 <li>
-                                    {oneSt.firstName}
+                                    <Link to={"/student/" + oneSt._id}>
+                                        {oneSt.firstName}
+                                    </Link>
                                 </li>
                                 <li>
-                                    {oneSt.LastName}
+                                    <button onClick={() => { DeleteThisStudent(oneSt._id) }}>Delete</button>
                                 </li>
-                                <li>
-                                    {oneSt.age}
-                                </li>
+                                <Link to={`/student/${oneSt._id}/update`} >Update</Link>
                             </ul>
                             <hr />
                         </div>

@@ -28,3 +28,42 @@ module.exports.CreateNewStudent = (req, res) => {
         })
         .catch(err => { res.json({ message: "Wait a minute 🙄🙄", err }) })
 }
+
+//? Read One
+
+module.exports.FindOneSingleStudent = (req, res) => {
+    StudentSchema.findOne({ _id: req.params.StudentId })
+        .then(oneSingleStudent => {
+            res.json(oneSingleStudent)
+        })
+        .catch((err) => {
+            res.json(err)
+        })
+}
+
+
+//? DELETE
+
+module.exports.deleteAnExistingStudent = (req, res) => {
+    StudentSchema.deleteOne({ _id: req.params.StudentId })
+        .then(result => {
+            res.json(result)
+        })
+        .catch((err) => {
+            res.json(err)
+        })
+}
+
+//? UPDATE
+
+module.exports.updateExistingStudent = (req, res) => {
+    console.log(req.body);
+    StudentSchema.findOneAndUpdate({ _id: req.params.StudentId }, req.body, { new: true, runValidators: true })
+        .then(result => {
+            res.json({ "done": result })
+        })
+        .catch((err) => {
+            res.json(err)
+        })
+
+}
